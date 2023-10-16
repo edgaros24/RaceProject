@@ -51,7 +51,16 @@ function LeagueDetailsScreen({ route, navigation }) {
   }));
 
   // Sort drivers by points in descending order
-  const sortedDrivers = driversWithPoints.sort((a, b) => b.points - a.points);
+  const sortedDrivers = driversWithPoints.sort((a, b) => {
+    // Compare by points first
+    if (b.points !== a.points) {
+      return b.points - a.points;
+    }
+
+    // If points are the same, compare by lastname
+    return a.lastname.localeCompare(b.lastname);
+  });
+
 
   return (
     <View style={styles.buttonContainer}>
